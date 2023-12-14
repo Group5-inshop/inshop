@@ -4,7 +4,6 @@ import { useNavigation } from "@react-navigation/native";
 
 export const FAB = () => {
   const navigation = useNavigation();
-//fab
   return (
     <TouchableOpacity
       activeOpacity={0.6}
