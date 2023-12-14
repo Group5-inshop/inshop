@@ -1,0 +1,1 @@
+export type ScannerStatus = "success" | "error" | undefined

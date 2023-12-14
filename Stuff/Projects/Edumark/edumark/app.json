@@ -1,0 +1,42 @@
+{
+  "expo": {
+    "name": "edumark",
+    "slug": "edumark",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/icon-1.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/images/splash-1.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff",
+      "plugins": [
+        [
+          "expo-barcode-scnner",
+          { "cameraPermission": "Allow $(PRODUCT_NAME) to access camera." }
+        ]
+      ]
+    },
+    "assetBundlePatterns": ["**/*"],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/adaptive-icon-1.png",
+        "backgroundColor": "#ffffff"
+      }
+    },
+    "web": {
+      "favicon": "./assets/images/favicon.png"
+    },
+    "plugins": [
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Allow Edumark to access camera."
+        }
+      ]
+    ]
+  }
+}
