@@ -17,8 +17,9 @@ class MyTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: 57,
       width: 150,
-      padding: EdgeInsets.only(left: 15, right: 15),
+      padding: EdgeInsets.only(left: 23, right: 25),
       child: TextFormField(
         controller: controller,
         decoration: InputDecoration(
@@ -27,11 +28,11 @@ class MyTextField extends StatelessWidget {
             enabledBorder: OutlineInputBorder(
                 borderSide:
                     BorderSide(color: Theme.of(context).colorScheme.tertiary),
-                borderRadius: BorderRadius.circular(40)),
+                borderRadius: BorderRadius.circular(10)),
             focusedBorder: OutlineInputBorder(
                 borderSide:
                     BorderSide(color: Theme.of(context).colorScheme.primary),
-                borderRadius: BorderRadius.circular(40)),
+                borderRadius: BorderRadius.circular(10)),
             fillColor: Theme.of(context).colorScheme.secondary),
       ),
     );

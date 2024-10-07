@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:inshop/main.dart';
 import 'package:inshop/pages/login.dart';
 import 'package:inshop/providers/nav_provider.dart';
 import 'package:inshop/widgets/mytextfield.dart';
 import 'package:provider/provider.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class Register extends StatelessWidget {
   TextEditingController _emailController = TextEditingController();
+  TextEditingController _firstnameController = TextEditingController();
+  TextEditingController _lastnameController = TextEditingController();
   TextEditingController _phonenumberController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
 
@@ -14,9 +18,9 @@ class Register extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.green,
-      ),
+      // appBar: AppBar(
+      //   backgroundColor: Colors.green,
+      // ),
       body: GestureDetector(
         onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
         child: ListView(
@@ -33,7 +37,25 @@ class Register extends StatelessWidget {
                 color: Theme.of(context).colorScheme.primaryFixedDim,
               ),
               SizedBox(
-                height: 70,
+                height: 30,
+              ),
+              MyTextField(
+                controller: _firstnameController,
+                obscure: false,
+                labelText: 'Firstname',
+                hintText: '',
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              MyTextField(
+                controller: _lastnameController,
+                obscure: false,
+                labelText: 'Surname',
+                hintText: '',
+              ),
+              SizedBox(
+                height: 10,
               ),
               MyTextField(
                 controller: _emailController,
@@ -63,13 +85,65 @@ class Register extends StatelessWidget {
                 height: 30,
               ),
               Container(
-                padding: EdgeInsets.only(left: 8, right: 8),
+                padding: EdgeInsets.only(left: 20, right: 20),
                 child: ElevatedButton(
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all<Color>(
-                        Theme.of(context).colorScheme.primary),
-                  ),
-                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(
+                      side: BorderSide(
+                          width: 1.75,
+                          color: const Color.fromARGB(255, 38, 122, 41)),
+                      backgroundColor: const Color.fromARGB(255, 135, 192, 121),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(50.0),
+                        // Set the width of the border
+                      )),
+                  onPressed: () async {
+                    try {
+                      final email = _emailController.text.trim();
+                      final password = _passwordController.text.trim();
+                      final phoneNumber = _phonenumberController.text.trim();
+                      final firstname = _firstnameController.text.trim();
+                      final lastname = _lastnameController.text.trim();
+                      final username = firstname + ' ' + lastname;
+                      // final userID = supabase.auth.currentUser!.id;
+                      await supabase.auth
+                          .signUp(password: password, email: email, data: {
+                        'username': username,
+                      });
+
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text('Done'),
+                          duration: Duration(seconds: 10),
+                        ),
+                      );
+
+                      context.read().navProvider.currentWidget = Placeholder();
+                    } on AuthException catch (error) {
+                      print(
+                          '''===================================================================
+                      ${error.message}
+                      =======================================================================''');
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text('error'),
+                          duration: Duration(seconds: 10),
+                        ),
+                      );
+                    } catch (error) {
+                      print(supabase.auth.currentUser!.id);
+                      print('''=============================================
+                      
+                      ${error.toString()}
+                      
+                      ========================================================''');
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text('error found'),
+                          duration: Duration(seconds: 10),
+                        ),
+                      );
+                    }
+                  },
                   child: const Text('Register',
                       style: TextStyle(fontSize: 18, color: Colors.white)),
                 ),
