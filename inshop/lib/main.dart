@@ -30,6 +30,12 @@ class _MyAppState extends State<MyApp> {
               children: [
                 //CartScreen(),
                ProductScreen(),
+               ProductScreen(),
+               ProductScreen(),
+               ProductScreen(),
+               ProductScreen(),
+               ProductScreen(),
+               ProductScreen(),
                 // Add more ProductScreen widgets as needed
               ],
             ),
