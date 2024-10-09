@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:test_demo/widgets/custom_search_delegate.dart';
+import 'package:inshop/widgets/custom_search_delegate.dart';
 
 class AppBarScreen extends StatelessWidget implements PreferredSizeWidget {
   @override
