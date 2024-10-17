@@ -22,16 +22,18 @@ class _BottomnavState extends State<Bottomnav> {
   Widget build(BuildContext context) {
     return BottomNavigationBar(
       onTap: (int newIndex) {
+        print(_currentIndex);
         setState(() {
           _currentIndex = newIndex;
+          if (_currentIndex == 0) {
+            changePages(Business());
+          } else if (_currentIndex == 1) {
+            changePages(Home());
+          } else {
+            changePages(Accounts());
+          }
         });
-        if (_currentIndex == 0) {
-          changePages(Business());
-        } else if (_currentIndex == 1) {
-          changePages(Home());
-        } else {
-          changePages(Accounts());
-        }
+        print(_currentIndex);
       },
       currentIndex: _currentIndex,
       backgroundColor: const Color.fromARGB(255, 202, 220, 202),

@@ -1,20 +1,65 @@
 import 'package:flutter/material.dart';
 import 'package:inshop/main.dart';
-import 'package:inshop/pages/home.dart';
 import 'package:inshop/pages/login.dart';
 import 'package:inshop/providers/nav_provider.dart';
 import 'package:inshop/widgets/mytextfield.dart';
 import 'package:provider/provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-class Register extends StatelessWidget {
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _firstnameController = TextEditingController();
-  TextEditingController _lastnameController = TextEditingController();
-  TextEditingController _phonenumberController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
-
+class Register extends StatefulWidget {
   Register({super.key});
+
+  @override
+  State<Register> createState() => _RegisterState();
+}
+
+class _RegisterState extends State<Register> {
+  TextEditingController _emailController = TextEditingController();
+
+  TextEditingController _firstnameController = TextEditingController();
+
+  TextEditingController _lastnameController = TextEditingController();
+
+  TextEditingController _phonenumberController = TextEditingController();
+
+  TextEditingController _passwordController = TextEditingController();
+  String normal = "Done";
+  late String error1;
+  late String error2;
+  late String messaging;
+
+  Future<void> signUp() async {
+    try {
+      await supabase.auth.signUp(
+          password: _passwordController.text.trim(),
+          email: _emailController.text.trim(),
+          // phone: _phonenumberController.text.trim(),
+          data: {
+            'phone': _phonenumberController.text.trim(),
+            'display name':
+                '${_firstnameController.text.trim()} ${_lastnameController.text.trim()}',
+          });
+      messaging = normal;
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => Login()));
+    } on AuthException catch (error) {
+      error1 = error.message;
+      print(
+          '''===================================================================
+    ${error.message}
+    =======================================================================''');
+      messaging = error1;
+    } catch (error) {
+      error2 = error.toString();
+      print(supabase.auth.currentUser!.id);
+      print('''=============================================
+    
+    ${error.toString()}
+    
+    ========================================================''');
+      messaging = error2;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -98,52 +143,16 @@ class Register extends StatelessWidget {
                         // Set the width of the border
                       )),
                   onPressed: () async {
-                    try {
-                      // final email = _emailController.text.trim();
-                      // final password = _passwordController.text.trim();
-                      // final phoneNumber = _phonenumberController.text.trim();
-                      // final firstname = _firstnameController.text.trim();
-                      // final lastname = _lastnameController.text.trim();
-                      // final username = firstname + ' ' + lastname;
-                      // // final userID = supabase.auth.currentUser!.id;
-                      // await supabase.auth
-                      //     .signUp(password: password, email: email, data: {
-                      //   'username': username,
-                      // });
+                    // final userID = supabase.auth.currentUser!.id;
+                    signUp();
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(messaging),
+                        duration: Duration(seconds: 10),
+                      ),
+                    );
 
-                      // ScaffoldMessenger.of(context).showSnackBar(
-                      //   SnackBar(
-                      //     content: Text('Done'),
-                      //     duration: Duration(seconds: 10),
-                      //   ),
-                      // );
-
-                      context.read<NavProvider>().changePage(widget: Home());
-                    } on AuthException catch (error) {
-                      print(
-                          '''===================================================================
-                      ${error.message}
-                      =======================================================================''');
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text('error'),
-                          duration: Duration(seconds: 10),
-                        ),
-                      );
-                    } catch (error) {
-                      print(supabase.auth.currentUser!.id);
-                      print('''=============================================
-                      
-                      ${error.toString()}
-                      
-                      ========================================================''');
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text('error found'),
-                          duration: Duration(seconds: 10),
-                        ),
-                      );
-                    }
+                    // context.read<NavProvider>().changePage(widget: Home());
                   },
                   child: const Text('Register',
                       style: TextStyle(fontSize: 18, color: Colors.white)),
