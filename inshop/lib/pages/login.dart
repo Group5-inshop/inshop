@@ -48,9 +48,7 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   backgroundColor: Colors.green,
-      // ),
+      
       body: GestureDetector(
         onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
         child: ListView(
@@ -101,13 +99,13 @@ class _LoginState extends State<Login> {
                       )),
                   onPressed: () async {
                     try {
-                      final email = _emailController.text.trim();
-                      final password = _passwordController.text.trim();
+                      // final email = _emailController.text.trim();
+                      // final password = _passwordController.text.trim();
 
-                      await supabase.auth
-                          .signInWithPassword(email: email, password: password);
-                      _emailController.clear();
-                      _passwordController.clear();
+                      // await supabase.auth
+                      //     .signInWithPassword(email: email, password: password);
+                      // _emailController.clear();
+                      // _passwordController.clear();
 
                       context.read<NavProvider>().changePage(widget: Home());
                     } on AuthException catch (error) {

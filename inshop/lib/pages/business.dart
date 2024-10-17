@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:inshop/widgets/bottomnav.dart';
 
-class Home extends StatefulWidget {
-  const Home({super.key});
+class Business extends StatefulWidget {
+  const Business({super.key});
 
   @override
-  State<Home> createState() => _HomeState();
+  State<Business> createState() => _BusinessState();
 }
 
-class _HomeState extends State<Home> {
+class _BusinessState extends State<Business> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,7 +16,7 @@ class _HomeState extends State<Home> {
           backgroundColor: Colors.green,
         ),
         body: Center(
-          child: Text('Home'),
+          child: Text('Business'),
         ),
         bottomNavigationBar: Bottomnav());
   }

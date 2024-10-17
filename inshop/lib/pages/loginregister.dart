@@ -9,8 +9,6 @@ class LoginRegister extends StatefulWidget {
 }
 
 class _LoginRegisterState extends State<LoginRegister> {
-
-
   @override
   void initState() {
     super.initState();
@@ -23,7 +21,7 @@ class _LoginRegisterState extends State<LoginRegister> {
     if (!mounted) return;
 
     if (session != null) {
-      Navigator.of(context).pushReplacementNamed('/home');
+      Navigator.of(context).pushReplacementNamed('/skeleton');
     } else {
       Navigator.of(context).pushReplacementNamed('/login');
     }

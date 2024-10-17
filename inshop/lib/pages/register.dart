@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:inshop/main.dart';
+import 'package:inshop/pages/home.dart';
 import 'package:inshop/pages/login.dart';
 import 'package:inshop/providers/nav_provider.dart';
 import 'package:inshop/widgets/mytextfield.dart';
@@ -98,26 +99,26 @@ class Register extends StatelessWidget {
                       )),
                   onPressed: () async {
                     try {
-                      final email = _emailController.text.trim();
-                      final password = _passwordController.text.trim();
-                      final phoneNumber = _phonenumberController.text.trim();
-                      final firstname = _firstnameController.text.trim();
-                      final lastname = _lastnameController.text.trim();
-                      final username = firstname + ' ' + lastname;
-                      // final userID = supabase.auth.currentUser!.id;
-                      await supabase.auth
-                          .signUp(password: password, email: email, data: {
-                        'username': username,
-                      });
+                      // final email = _emailController.text.trim();
+                      // final password = _passwordController.text.trim();
+                      // final phoneNumber = _phonenumberController.text.trim();
+                      // final firstname = _firstnameController.text.trim();
+                      // final lastname = _lastnameController.text.trim();
+                      // final username = firstname + ' ' + lastname;
+                      // // final userID = supabase.auth.currentUser!.id;
+                      // await supabase.auth
+                      //     .signUp(password: password, email: email, data: {
+                      //   'username': username,
+                      // });
 
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text('Done'),
-                          duration: Duration(seconds: 10),
-                        ),
-                      );
+                      // ScaffoldMessenger.of(context).showSnackBar(
+                      //   SnackBar(
+                      //     content: Text('Done'),
+                      //     duration: Duration(seconds: 10),
+                      //   ),
+                      // );
 
-                      context.read().navProvider.currentWidget = Placeholder();
+                      context.read<NavProvider>().changePage(widget: Home());
                     } on AuthException catch (error) {
                       print(
                           '''===================================================================

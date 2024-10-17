@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:inshop/pages/skeleton.dart';
 import 'package:inshop/providers/nav_provider.dart';
+import 'package:inshop/widgets/bottomnav.dart';
 import 'package:provider/provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -44,32 +45,10 @@ class MyApp extends StatelessWidget {
                     style:
                         TextButton.styleFrom(foregroundColor: Colors.green))),
             home: Scaffold(
-              appBar: AppBar(
-                backgroundColor: Colors.green,
-              ),
-              // backgroundColor: ThemeData.dark().colorScheme.primary),
-              body: Skeleton(),
-              bottomNavigationBar: BottomNavigationBar(
-                backgroundColor: const Color.fromARGB(255, 202, 220, 202),
-                items: const [
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.business),
-                    label: 'Business',
-                    tooltip: 'Business',
-                  ),
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.home),
-                    label: 'Home',
-                    tooltip: 'Home',
-                  ),
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.account_circle),
-                    label: 'Account',
-                    tooltip: 'Account',
-                  ),
-                ],
-              ),
-            ),
+                
+                // backgroundColor: ThemeData.dark().colorScheme.primary),
+                body: Skeleton(),
+                ),
           )),
     );
   }
