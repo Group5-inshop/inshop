@@ -7,13 +7,13 @@ import 'package:inshop/pages/login.dart';
 class NavProvider extends ChangeNotifier {
   Widget currentWidget = Login();
 
-  int index = 0;
+  int index = 1;
 
   // NavProvider({
   //   this.currentWidget = const Placeholder(),
   // });
 
-  void changePage({required Widget widget}) async {
+  Future<void> changePage({required Widget widget}) async {
     currentWidget = widget;
     print(currentWidget);
     print('updated');
@@ -21,7 +21,7 @@ class NavProvider extends ChangeNotifier {
   }
 
   int get getIndex => index;
-  void changeBottomNav({required Widget page}) async {
+  Future <void> changeBottomNav({required Widget page}) async {
     if (page is Business) {
       index = 0;
       changePage(widget: Business());

@@ -14,25 +14,22 @@ class Bottomnav extends StatefulWidget {
 
 class _BottomnavState extends State<Bottomnav> {
   int _currentIndex = 1;
-  void changePages(Widget page) {
-    context.read<NavProvider>().changePage(widget: page);
+
+  List<Widget> pages = [const Business(), const Home(), const Accounts()];
+
+  Future<void> changePages(Widget page) async {
+    await context.read<NavProvider>().changePage(widget: page);
   }
 
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
-      onTap: (int newIndex) {
+      onTap: (int newIndex) async {
         print(_currentIndex);
         setState(() {
           _currentIndex = newIndex;
-          if (_currentIndex == 0) {
-            changePages(Business());
-          } else if (_currentIndex == 1) {
-            changePages(Home());
-          } else {
-            changePages(Accounts());
-          }
         });
+        context.read<NavProvider>().changePage(widget: pages[newIndex]);
         print(_currentIndex);
       },
       currentIndex: _currentIndex,

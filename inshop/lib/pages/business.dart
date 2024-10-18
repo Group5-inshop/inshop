@@ -18,6 +18,7 @@ class _BusinessState extends State<Business> {
         body: Center(
           child: Text('Business'),
         ),
-        bottomNavigationBar: Bottomnav());
+        // bottomNavigationBar: Bottomnav()
+        );
   }
 }

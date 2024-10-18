@@ -18,6 +18,7 @@ class _AccountsState extends State<Accounts> {
         body: Center(
           child: Text('Accounts'),
         ),
-        bottomNavigationBar: Bottomnav());
+        // bottomNavigationBar: Bottomnav()
+        );
   }
 }

@@ -18,6 +18,7 @@ class _HomeState extends State<Home> {
         body: Center(
           child: Text('Home'),
         ),
-        bottomNavigationBar: Bottomnav());
+        // bottomNavigationBar: Bottomnav()
+        );
   }
 }

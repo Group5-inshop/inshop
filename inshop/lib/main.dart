@@ -45,10 +45,10 @@ class MyApp extends StatelessWidget {
                     style:
                         TextButton.styleFrom(foregroundColor: Colors.green))),
             home: Scaffold(
-                
-                // backgroundColor: ThemeData.dark().colorScheme.primary),
-                body: Skeleton(),
-                ),
+              // backgroundColor: ThemeData.dark().colorScheme.primary),
+              body: Skeleton(),
+              bottomNavigationBar: Bottomnav(),
+            ),
           )),
     );
   }
