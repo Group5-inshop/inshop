@@ -14,11 +14,9 @@ class Bottomnav extends StatefulWidget {
 
 class _BottomnavState extends State<Bottomnav> {
   int _currentIndex = 1;
-
   List<Widget> pages = [const Business(), const Home(), const Accounts()];
-
-  Future<void> changePages(Widget page) async {
-    await context.read<NavProvider>().changePage(widget: page);
+  void changePages(Widget page) {
+    context.read<NavProvider>().changePage(widget: page);
   }
 
   @override

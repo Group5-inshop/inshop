@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:inshop/main.dart';
+import 'package:inshop/widgets/bottomnav.dart';
 import 'package:inshop/widgets/myprofilecontainer.dart';
 
 class Accounts extends StatefulWidget {
@@ -57,8 +58,7 @@ class _AccountsState extends State<Accounts> {
           SizedBox(
             height: 20,
           ),
-        ])
-        // bottomNavigationBar: Bottomnav()
-        );
+        ]),
+        bottomNavigationBar: Bottomnav());
   }
 }
