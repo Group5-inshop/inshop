@@ -18,8 +18,20 @@ final supabase = Supabase.instance.client;
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
+    // Future<Widget> bodyType() async {
+    //   if (await context.watch<NavProvider>().currentWidget != Login() ||
+    //       await context.watch<NavProvider>().currentWidget != Register()) {
+    //     return Bottomnav();
+    //   } else {
+    //     return BottomNavigationBar(items: []);
+    //   }
+    // }
+
+    // Widget a = bodyType() as Widget;
+
     return MultiProvider(
       providers: [
         ListenableProvider(create: (context) => NavProvider()),

@@ -77,7 +77,7 @@ class _LoginState extends State<Login> {
               ),
               MyTextField(
                 controller: _passwordController,
-                obscure: true,
+                obscure: false,
                 labelText: 'Password',
                 hintText: '',
               ),
@@ -111,14 +111,14 @@ class _LoginState extends State<Login> {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
                           content: Text("error is:  ${error.message}"),
-                          duration: Duration(seconds: 10),
+                          duration: Duration(seconds: 2),
                         ),
                       );
                     } catch (error) {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
                           content: Text(error.toString()),
-                          duration: Duration(seconds: 10),
+                          duration: Duration(seconds: 2),
                         ),
                       );
                     }

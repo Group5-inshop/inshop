@@ -35,7 +35,7 @@ class _RegisterState extends State<Register> {
           email: _emailController.text.trim(),
           // phone: _phonenumberController.text.trim(),
           data: {
-            'phone': _phonenumberController.text.trim(),
+            'phone': _phonenumberController.text,
             'display name':
                 '${_firstnameController.text.trim()} ${_lastnameController.text.trim()}',
           });
