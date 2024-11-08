@@ -33,7 +33,7 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  final int _counter = 0;
   
   @override
   Widget build(BuildContext context) {
@@ -42,7 +42,7 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
       ),
-      body: Placeholder(),
+      body: const Placeholder(),
       
     );
   }

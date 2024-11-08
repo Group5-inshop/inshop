@@ -7,22 +7,22 @@ import 'package:provider/provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class Register extends StatefulWidget {
-  Register({super.key});
+  const Register({super.key});
 
   @override
   State<Register> createState() => _RegisterState();
 }
 
 class _RegisterState extends State<Register> {
-  TextEditingController _emailController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
 
-  TextEditingController _firstnameController = TextEditingController();
+  final TextEditingController _firstnameController = TextEditingController();
 
-  TextEditingController _lastnameController = TextEditingController();
+  final TextEditingController _lastnameController = TextEditingController();
 
-  TextEditingController _phonenumberController = TextEditingController();
+  final TextEditingController _phonenumberController = TextEditingController();
 
-  TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
   String normal = "Done";
   late String error1;
   late String error2;
@@ -41,7 +41,7 @@ class _RegisterState extends State<Register> {
           });
       messaging = normal;
       Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => Login()));
+          context, MaterialPageRoute(builder: (context) => const Login()));
     } on AuthException catch (error) {
       error1 = error.message;
       print(
@@ -70,11 +70,11 @@ class _RegisterState extends State<Register> {
       body: GestureDetector(
         onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
         child: ListView(
-            physics: BouncingScrollPhysics(
+            physics: const BouncingScrollPhysics(
               parent: ClampingScrollPhysics(),
             ),
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 70,
               ),
               Icon(
@@ -82,7 +82,7 @@ class _RegisterState extends State<Register> {
                 size: 72.0,
                 color: Theme.of(context).colorScheme.primaryFixedDim,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
               MyTextField(
@@ -91,7 +91,7 @@ class _RegisterState extends State<Register> {
                 labelText: 'Firstname',
                 hintText: '',
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               MyTextField(
@@ -100,7 +100,7 @@ class _RegisterState extends State<Register> {
                 labelText: 'Surname',
                 hintText: '',
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               MyTextField(
@@ -109,7 +109,7 @@ class _RegisterState extends State<Register> {
                 labelText: 'Email',
                 hintText: '',
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               MyTextField(
@@ -118,7 +118,7 @@ class _RegisterState extends State<Register> {
                 labelText: 'Phone number',
                 hintText: '',
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               MyTextField(
@@ -127,16 +127,16 @@ class _RegisterState extends State<Register> {
                 labelText: 'Password',
                 hintText: '',
               ),
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
               Container(
-                padding: EdgeInsets.only(left: 20, right: 20),
+                padding: const EdgeInsets.only(left: 20, right: 20),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                      side: BorderSide(
+                      side: const BorderSide(
                           width: 1.75,
-                          color: const Color.fromARGB(255, 38, 122, 41)),
+                          color: Color.fromARGB(255, 38, 122, 41)),
                       backgroundColor: const Color.fromARGB(255, 135, 192, 121),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(50.0),
@@ -148,7 +148,7 @@ class _RegisterState extends State<Register> {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                         content: Text(messaging),
-                        duration: Duration(seconds: 10),
+                        duration: const Duration(seconds: 10),
                       ),
                     );
 
@@ -158,20 +158,20 @@ class _RegisterState extends State<Register> {
                       style: TextStyle(fontSize: 18, color: Colors.white)),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text('Already have an account? '),
-                  SizedBox(width: 10),
+                  const Text('Already have an account? '),
+                  const SizedBox(width: 10),
                   GestureDetector(
-                      child: Text(
+                      child: const Text(
                         'LOGIN',
                       ),
                       onTap: () {
-                        context.read<NavProvider>().changePage(widget: Login());
+                        context.read<NavProvider>().changePage(widget: const Login());
                       })
                 ],
               ),

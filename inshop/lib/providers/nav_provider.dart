@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
 class NavProvider extends ChangeNotifier {
-  Widget currentWidget = Placeholder();
+  Widget currentWidget = const Placeholder();
 
   int index2 = 0;
 
   void changePage({required Widget widget}) async {
     currentWidget = widget;
 
-    if (widget == Placeholder() || widget == Placeholder()) {
+    if (widget == const Placeholder() || widget == const Placeholder()) {
       index2 = 0;
       print(index2);
     } else {
