@@ -6,6 +6,7 @@ import 'package:inshop/screens/login.dart';
 import 'package:inshop/screens/register.dart';
 import 'package:inshop/widgets/bottomnav.dart';
 import 'package:inshop/widgets/myprofilecontainer.dart';
+import 'package:inshop/widgets/mysubscriptioncontainer.dart';
 import 'package:provider/provider.dart';
 
 class Accounts extends StatefulWidget {
@@ -38,7 +39,7 @@ class _AccountsState extends State<Accounts> {
           backgroundColor: Colors.green,
         ),
         body: ListView(children: [
-          Icon(Icons.account_circle),
+          Icon(Icons.account_circle, size: 102.0, color: const Color.fromARGB(255, 55, 74, 56)),
           const SizedBox(height: 10),
           Myprofilecontainer(
               textName: 'Name',
@@ -69,22 +70,20 @@ class _AccountsState extends State<Accounts> {
             scrollDirection: Axis.horizontal,
             shrinkWrap: true,
             children: [
-            ElevatedButton( child: const Text("Subscription"), onPressed: () {
-              print("pressed");
-            }, style: ButtonStyle(minimumSize: MaterialStateProperty.all(const Size(150, 350))),),
-            SizedBox(width: 5,),
-            ElevatedButton( child: const Text("Subscription2"), onPressed: () {
-              print("pressed");
-            }, style: ButtonStyle(minimumSize: MaterialStateProperty.all(const Size(150, 350))),),
-             SizedBox(width: 5,),
-             Container(
-              width: 150,
-              height: 350,
-              ),
-            ElevatedButton( child: const Text("Subscription3"), onPressed: () {
-              print("pressed");
-            }, style: ButtonStyle(minimumSize: MaterialStateProperty.all(const Size(150, 350))),),
-
+              SizedBox(
+                width: 20,),
+              SubscriptionContainer( text: '''WEEKLY
+              MWK12,000.00''',),
+              SizedBox(
+                width: 7,),
+              SubscriptionContainer( text: '''MONTHLY
+              MWK45,0000.00''',),
+              SizedBox(
+                width: 7,),
+              SubscriptionContainer( text: '''YEARLY
+              MWK520,000.00''',),
+              SizedBox(
+                width: 20,),
           ]),
           ),
           SizedBox(
