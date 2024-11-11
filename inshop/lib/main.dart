@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:inshop/providers/nav_provider.dart';
+import 'package:inshop/screens/skeleton_log.dart';
+import 'package:provider/provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 void main() async {
   await Supabase.initialize(
@@ -33,17 +36,42 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 class _MyHomePageState extends State<MyHomePage> {
-  final int _counter = 0;
+  // final int _counter = 0;
   
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
-      ),
-      body: const Placeholder(),
-      
+    return MultiProvider(
+      providers: [
+        ListenableProvider(create: (context) => NavProvider()),
+      ],
+      child: ListenableProvider(
+          create: (context) => NavProvider(),
+          child: MaterialApp(
+            theme: ThemeData(useMaterial3:true,
+            colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),),
+            debugShowCheckedModeBanner: false,
+            title: 'Inshop',
+            // theme: ThemeData(
+                // appBarTheme: AppBarTheme(
+                //   color: Colors.green,
+                //   // backgroundColor: Colors.green,
+                //   // foregroundColor: Colors.green,
+                // ),
+                // primaryColor: Colors.green,
+                // colorScheme: ColorScheme.fromSwatch(
+                //   primarySwatch: Colors.green,
+                // ).copyWith(
+                //   primary: Colors.green,
+                // ),
+                // textButtonTheme: TextButtonThemeData(
+                //     style:
+                //         TextButton.styleFrom(foregroundColor: Colors.green))),
+            home: Scaffold(
+                
+                // backgroundColor: ThemeData.dark().colorScheme.primary),
+                body: Skeleton(),
+                ),
+          )),
     );
   }
 }

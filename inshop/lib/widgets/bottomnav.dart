@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:inshop/providers/nav_provider.dart';
+import 'package:inshop/screens/accounts.dart';
+import 'package:inshop/screens/staff_management.dart';
 import 'package:provider/provider.dart';
 
 class Bottomnav extends StatefulWidget {
@@ -11,7 +13,7 @@ class Bottomnav extends StatefulWidget {
 
 class _BottomnavState extends State<Bottomnav> {
   int _currentIndex = 1;
-  List<Widget> pages = [const Placeholder(), const Placeholder(), const Placeholder()];
+  List<Widget> pages = [const StaffManagement(), const Placeholder(), const Accounts()];
   void changePages(Widget page) {
     context.read<NavProvider>().changePage(widget: page);
   }

@@ -16,7 +16,6 @@ class Skeleton extends StatelessWidget {
     context.watch<NavProvider>().currentWidget == const Register()){
       return Scaffold(
         body: page,
-
         );
     }
     else{

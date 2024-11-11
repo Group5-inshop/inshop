@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:inshop/screens/login.dart';
+import 'package:inshop/screens/register.dart';
 
 class NavProvider extends ChangeNotifier {
-  Widget currentWidget = const Placeholder();
+  Widget currentWidget = Login();
 
   int index2 = 0;
 
   void changePage({required Widget widget}) async {
     currentWidget = widget;
 
-    if (widget == const Placeholder() || widget == const Placeholder()) {
+    if (widget.toString() == "Login" || widget.toString() == "Register"){
       index2 = 0;
       print(index2);
+    
     } else {
       index2 = 1;
       print(index2);

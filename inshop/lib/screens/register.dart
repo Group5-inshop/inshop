@@ -30,6 +30,7 @@ class _RegisterState extends State<Register> {
 
   Future<void> signUp() async {
     try {
+      
       await supabase.auth.signUp(
           password: _passwordController.text.trim(),
           email: _emailController.text.trim(),
@@ -39,17 +40,20 @@ class _RegisterState extends State<Register> {
             'display name':
                 '${_firstnameController.text.trim()} ${_lastnameController.text.trim()}',
           });
-      messaging = normal;
+      
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (context) => const Login()));
+          messaging = normal;
     } on AuthException catch (error) {
+      messaging = error1;
       error1 = error.message;
       print(
           '''===================================================================
     ${error.message}
     =======================================================================''');
-      messaging = error1;
+      
     } catch (error) {
+      messaging = error2;
       error2 = error.toString();
       print(supabase.auth.currentUser!.id);
       print('''=============================================
@@ -57,7 +61,7 @@ class _RegisterState extends State<Register> {
     ${error.toString()}
     
     ========================================================''');
-      messaging = error2;
+      
     }
   }
 
@@ -145,6 +149,9 @@ class _RegisterState extends State<Register> {
                   onPressed: () async {
                     // final userID = supabase.auth.currentUser!.id;
                     signUp();
+                     context
+                            .read<NavProvider>()
+                            .changePage(widget: const Login());
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                         content: Text(messaging),

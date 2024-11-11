@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:inshop/main.dart';
 import 'package:inshop/providers/nav_provider.dart';
+import 'package:inshop/screens/register.dart';
 import 'package:inshop/widgets/mytextfield.dart';
 import 'package:provider/provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -20,26 +21,26 @@ class _LoginState extends State<Login> {
   final TextEditingController _phonenumberController = TextEditingController();
 
   final TextEditingController _passwordController = TextEditingController();
-  late final StreamSubscription<AuthState> authSubscription;
+  // late final StreamSubscription<AuthState> authSubscription;
 
-  @override
-  void initState() {
-    authSubscription = supabase.auth.onAuthStateChange.listen((data) {
-      final session = data.session;
-      if (session != null) {
-        Navigator.of(context).pushReplacementNamed('/home');
-      } else {
-        Navigator.of(context).pushReplacementNamed('/login');
-      }
-    });
-    super.initState();
-  }
+  // @override
+  // void initState() {
+  //   authSubscription = supabase.auth.onAuthStateChange.listen((data) {
+  //     final session = data.session;
+  //     if (session != null) {
+  //       Navigator.of(context).pushReplacementNamed('/home');
+  //     } else {
+  //       Navigator.of(context).pushReplacementNamed('/login');
+  //     }
+  //   });
+  //   super.initState();
+  // }
 
   @override
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();
-    authSubscription.cancel();
+    // authSubscription.cancel();
     super.dispose();
   }
 
@@ -75,7 +76,7 @@ class _LoginState extends State<Login> {
               ),
               MyTextField(
                 controller: _passwordController,
-                obscure: false,
+                obscure: true,
                 labelText: 'Password',
                 hintText: '',
               ),
@@ -140,7 +141,7 @@ class _LoginState extends State<Login> {
                       onTap: () {
                         context
                             .read<NavProvider>()
-                            .changePage(widget: const Placeholder()); // a register widget is supposed to be here
+                            .changePage(widget: const Register()); // a register widget is supposed to be here
                       })
                 ],
               ),
