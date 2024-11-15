@@ -10,6 +10,8 @@ class StaffManagement extends StatefulWidget {
 class _StaffManagementState extends State<StaffManagement> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return const Center(
+      child: Text('Where you add products'),
+    );
   }
 }

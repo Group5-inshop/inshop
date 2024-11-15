@@ -1,15 +1,14 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:inshop/main.dart';
 import 'package:inshop/providers/nav_provider.dart';
-import 'package:inshop/screens/register.dart';
+import 'package:inshop/screens/Home.dart';
 import 'package:inshop/widgets/mytextfield.dart';
 import 'package:provider/provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class Login extends StatefulWidget {
-  const Login({super.key});
+  final void Function()? onTap;
+  const Login({super.key, required this.onTap});
 
   @override
   State<Login> createState() => _LoginState();
@@ -18,24 +17,10 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   final TextEditingController _emailController = TextEditingController();
 
-  final TextEditingController _phonenumberController = TextEditingController();
+  // final TextEditingController _phonenumberController = TextEditingController();
 
   final TextEditingController _passwordController = TextEditingController();
-  // late final StreamSubscription<AuthState> authSubscription;
-
-  // @override
-  // void initState() {
-  //   authSubscription = supabase.auth.onAuthStateChange.listen((data) {
-  //     final session = data.session;
-  //     if (session != null) {
-  //       Navigator.of(context).pushReplacementNamed('/home');
-  //     } else {
-  //       Navigator.of(context).pushReplacementNamed('/login');
-  //     }
-  //   });
-  //   super.initState();
-  // }
-
+ 
   @override
   void dispose() {
     _emailController.dispose();
@@ -105,7 +90,7 @@ class _LoginState extends State<Login> {
                       _emailController.clear();
                       _passwordController.clear();
 
-                      context.read<NavProvider>().changePage(widget: const Placeholder()); // there is supposed to be a home widget here
+                      context.read<NavProvider>().changePage(widget: const Home()); // there is supposed to be a home widget here
                     } on AuthException catch (error) {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
@@ -139,10 +124,8 @@ class _LoginState extends State<Login> {
                         'REGISTER',
                       ),
                       onTap: () {
-                        context
-                            .read<NavProvider>()
-                            .changePage(widget: const Register()); // a register widget is supposed to be here
-                      })
+                        widget.onTap!();
+                       })
                 ],
               ),
             ]),

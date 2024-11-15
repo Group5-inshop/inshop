@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:inshop/main.dart';
-import 'package:inshop/providers/nav_provider.dart';
-import 'package:inshop/screens/login.dart';
 import 'package:inshop/widgets/mytextfield.dart';
-import 'package:provider/provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class Register extends StatefulWidget {
-  const Register({super.key});
+  final void Function()? onTap;
+  const Register({super.key, required this.onTap});
 
   @override
   State<Register> createState() => _RegisterState();
@@ -39,10 +37,7 @@ class _RegisterState extends State<Register> {
             'phone': _phonenumberController.text,
             'display name':
                 '${_firstnameController.text.trim()} ${_lastnameController.text.trim()}',
-          });
-      
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => const Login()));
+          }); 
           messaging = normal;
     } on AuthException catch (error) {
       messaging = error1;
@@ -68,9 +63,6 @@ class _RegisterState extends State<Register> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   backgroundColor: Colors.green,
-      // ),
       body: GestureDetector(
         onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
         child: ListView(
@@ -149,17 +141,13 @@ class _RegisterState extends State<Register> {
                   onPressed: () async {
                     // final userID = supabase.auth.currentUser!.id;
                     signUp();
-                     context
-                            .read<NavProvider>()
-                            .changePage(widget: const Login());
+                    widget.onTap!();
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                         content: Text(messaging),
                         duration: const Duration(seconds: 10),
                       ),
                     );
-
-                    // context.read<NavProvider>().changePage(widget: Home());
                   },
                   child: const Text('Register',
                       style: TextStyle(fontSize: 18, color: Colors.white)),
@@ -178,7 +166,7 @@ class _RegisterState extends State<Register> {
                         'LOGIN',
                       ),
                       onTap: () {
-                        context.read<NavProvider>().changePage(widget: const Login());
+                        widget.onTap!();
                       })
                 ],
               ),

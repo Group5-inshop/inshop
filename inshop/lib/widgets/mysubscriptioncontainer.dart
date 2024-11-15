@@ -14,7 +14,7 @@ class SubscriptionContainer extends StatelessWidget {
               decoration: BoxDecoration(
                 border: Border.all(color: const Color.fromARGB(255, 47, 100, 49), width: 2.0,),
                 borderRadius: BorderRadius.circular(10),
-                color: const Color.fromARGB(255, 241, 253, 241),
+                color: const Color.fromARGB(255, 227, 245, 228),
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
