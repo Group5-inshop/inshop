@@ -21,10 +21,10 @@ class _RegisterState extends State<Register> {
   final TextEditingController _phonenumberController = TextEditingController();
 
   final TextEditingController _passwordController = TextEditingController();
-  String normal = "Done";
-  late String error1;
-  late String error2;
-  late String messaging;
+  // String normal = "Done";
+  // late String error1;
+  // late String error2;
+  // late String messaging;
 
   Future<void> signUp() async {
     try {
@@ -38,18 +38,20 @@ class _RegisterState extends State<Register> {
             'display name':
                 '${_firstnameController.text.trim()} ${_lastnameController.text.trim()}',
           }); 
-          messaging = normal;
+          // messaging = normal;
     } on AuthException catch (error) {
-      messaging = error1;
-      error1 = error.message;
+      // error1 = error.message;
+      // messaging = error1;
+      
       print(
           '''===================================================================
     ${error.message}
     =======================================================================''');
       
     } catch (error) {
-      messaging = error2;
-      error2 = error.toString();
+      // error2 = error.toString();
+      // messaging = error2;
+      
       print(supabase.auth.currentUser!.id);
       print('''=============================================
     
@@ -144,7 +146,7 @@ class _RegisterState extends State<Register> {
                     widget.onTap!();
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
-                        content: Text(messaging),
+                        content: Text('Registration successful'),
                         duration: const Duration(seconds: 10),
                       ),
                     );

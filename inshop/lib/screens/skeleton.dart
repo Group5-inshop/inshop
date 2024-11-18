@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:inshop/screens/Home.dart';
 import 'package:inshop/screens/accounts.dart';
+import 'package:inshop/screens/product_list_screen.dart';
 import 'package:inshop/screens/staff_management.dart';
 
 class Skeleton2 extends StatefulWidget {
@@ -13,7 +14,7 @@ class Skeleton2 extends StatefulWidget {
 class _Skeleton2State extends State<Skeleton2> {
 int currentIndex = 1;
   
-  List<Widget> pages = [const StaffManagement(), const Home(), const Accounts()];
+  List<Widget> pages = [const StaffManagement(),  ProductListScreen(), const Accounts()];
 
   @override
   Widget build(BuildContext context) {
