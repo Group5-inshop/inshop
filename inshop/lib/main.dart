@@ -70,7 +70,7 @@ class _MyHomePageState extends State<MyHomePage> {
             home: Scaffold(
                 
                 // backgroundColor: ThemeData.dark().colorScheme.primary),
-                body: Skeleton2(),
+                body: Skeleton(),
                 ),
           )),
     );
