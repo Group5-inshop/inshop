@@ -53,11 +53,11 @@ class Authservices {
           password: _passwordController.text.trim(),
           email: _emailController.text.trim(),
           // phone: _phonenumberController.text.trim(),
-          // data: {
-          //   'phone': _phonenumberController.text,
-          //   'display name':
-          //       '${_firstnameController.text.trim()} ${_lastnameController.text.trim()}',
-          // }
+          data: {
+            'phone': _phonenumberController.text,
+            'display name':
+                '${_firstnameController.text.trim()} ${_lastnameController.text.trim()}',
+          }
           ); 
           messaging = normal;
           await supabase
@@ -80,7 +80,7 @@ class Authservices {
       
       print(
           '''===================================================================
-    ${error.message} gvvgh
+    ${error.message}
     =======================================================================''');
       
     } catch (error) {

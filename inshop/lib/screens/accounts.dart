@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:inshop/main.dart';
 import 'package:inshop/providers/nav_provider.dart';
 import 'package:inshop/screens/login_register.dart';
+import 'package:inshop/services/authservices.dart';
 import 'package:inshop/widgets/myprofilecontainer.dart';
 import 'package:inshop/widgets/mysubscriptioncontainer.dart';
 import 'package:provider/provider.dart';
@@ -14,16 +15,19 @@ class Accounts extends StatefulWidget {
 }
 
 class _AccountsState extends State<Accounts> {
-  // String phone = "";
-  // String phones() {
 
-  //   try {
-  //     phone = supabase.auth.currentUser!.userMetadata!['phone'];
-  //   } catch (e) {
-  //     phone = "No phone numbers";
-  //   }
-  //   return phone;
-  // }
+  Authservices authservice = Authservices();
+
+  String phone = "";
+  String phones() {
+
+    try {
+      phone = supabase.auth.currentUser!.userMetadata!['phone'];
+    } catch (e) {
+      phone = "No phone numbers";
+    }
+    return phone;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,21 +38,21 @@ class _AccountsState extends State<Accounts> {
           actions: [ ElevatedButton( 
             child: const Text('Logout'), 
             onPressed: (){
-              
+              authservice.logout(context);
           }), const SizedBox(width: 10)] ,),
           
         body: ListView(children: [
           const Icon(Icons.account_circle, size: 102.0, color: Color.fromARGB(255, 89, 149, 104),),
           const SizedBox(height: 10),
-          // Myprofilecontainer(
-          //     textName: 'Name',
-          //     textField: supabase.auth.currentUser!.userMetadata?['username']),
-          // const SizedBox(height: 10),
-          // Myprofilecontainer(
-          //     textName: 'Email',
-          //     textField: supabase.auth.currentUser!.email.toString()),
-          // const SizedBox(height: 10),
-          // Myprofilecontainer(textName: 'Phone', textField: phones()),
+          Myprofilecontainer(
+              textName: 'Name',
+              textField: supabase.auth.currentUser!.userMetadata?['username']),
+          const SizedBox(height: 10),
+          Myprofilecontainer(
+              textName: 'Email',
+              textField: supabase.auth.currentUser!.email.toString()),
+          const SizedBox(height: 10),
+          Myprofilecontainer(textName: 'Phone', textField: phones()),
           SizedBox(height: 20),
           const Center(
             child: Text('Subscription'),
