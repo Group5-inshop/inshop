@@ -34,9 +34,7 @@ class _AccountsState extends State<Accounts> {
           actions: [ ElevatedButton( 
             child: const Text('Logout'), 
             onPressed: (){
-              // supabase.auth.signOut();
-              // context.read<NavProvider>()
-              //       .changePage(widget: const LoginRegister());
+              
           }), const SizedBox(width: 10)] ,),
           
         body: ListView(children: [
