@@ -1,21 +1,27 @@
+// main.dart
 import 'package:flutter/material.dart';
-import 'package:inshop/screens/order_list_screen.dart';
+import 'package:provider/provider.dart';
+import 'order_service.dart';
+import 'order_management_page.dart';
 
 void main() {
-  runApp(const InshopApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => OrderService(),
+      child: MyApp(),
+    ),
+  );
 }
 
-class InshopApp extends StatelessWidget {
-  const InshopApp({super.key});
-
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Inshop',
+      title: 'Inshop Order Management',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: OrderListScreen(),
+      home: OrderManagementPage(),
     );
   }
 }
