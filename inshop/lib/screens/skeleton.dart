@@ -55,7 +55,7 @@ class _Skeleton2State extends State<Skeleton2> {
             ),
             unselectedLabelStyle: const TextStyle(
               fontSize: 14.0,
-              fontWeight: FontWeight.normal,
+              fontWeight: FontWeight.bold,
             ),
             items: const [
               BottomNavigationBarItem(
