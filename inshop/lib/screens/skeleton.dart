@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:inshop/screens/accounts.dart';
 import 'package:inshop/screens/home_screen.dart';
+import 'package:inshop/screens/orders_screen.dart';
 import 'package:inshop/screens/product_list_screen.dart';
 import 'package:inshop/screens/sell_screen.dart';
 
@@ -16,9 +17,9 @@ class _Skeleton2State extends State<Skeleton2> {
 
   List<Widget> pages = [
     const HomeScreen(),
-    ProductListScreen(),
-    const Accounts(),
     const SellScreen(),
+    const OrdersScreen(),
+    const Accounts(),
   ];
 
   @override
@@ -29,7 +30,7 @@ class _Skeleton2State extends State<Skeleton2> {
         data: NavigationBarThemeData(
           backgroundColor: const Color.fromARGB(255, 227, 245, 228),
           indicatorColor: const Color.fromARGB(255, 89, 149, 104),
-          labelTextStyle: MaterialStateProperty.all<TextStyle>(
+          labelTextStyle: WidgetStateProperty.all<TextStyle>(
             const TextStyle(color: Color.fromARGB(255, 63, 107, 74)),
           ),
         ),
@@ -47,24 +48,24 @@ class _Skeleton2State extends State<Skeleton2> {
                   size: 35, color: Color.fromARGB(255, 194, 243, 200)),
             ),
             NavigationDestination(
+              icon: Icon(Icons.sell_outlined,
+                  color: Color.fromARGB(255, 89, 149, 104)),
+              label: 'Sell',
+              selectedIcon: Icon(Icons.add_circle_outline_rounded,
+                  size: 35, color: Color.fromARGB(255, 194, 243, 200)),
+            ),
+            NavigationDestination(
               icon: Icon(Icons.home_outlined,
                   color: Color.fromARGB(255, 89, 149, 104)),
-              label: 'Home',
-              selectedIcon: Icon(Icons.home,
+              label: 'Orders',
+              selectedIcon: Icon(Icons.work_history,
                   size: 35, color: Color.fromARGB(255, 194, 243, 200)),
             ),
             NavigationDestination(
               icon: Icon(Icons.account_circle_outlined,
                   color: Color.fromARGB(255, 89, 149, 104)),
-              label: 'Account',
+              label: 'Subsription',
               selectedIcon: Icon(Icons.account_circle,
-                  size: 35, color: Color.fromARGB(255, 194, 243, 200)),
-            ),
-            NavigationDestination(
-              icon: Icon(Icons.sell_outlined,
-                  color: Color.fromARGB(255, 89, 149, 104)),
-              label: 'Sell',
-              selectedIcon: Icon(Icons.sell,
                   size: 35, color: Color.fromARGB(255, 194, 243, 200)),
             ),
           ],

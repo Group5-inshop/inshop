@@ -113,7 +113,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(title: 'Home...'),
+      appBar: const CustomAppBar(title: 'Home'),
       body: _buildCategoryView('cars'), // Default category
     );
   }
