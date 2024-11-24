@@ -15,7 +15,7 @@ class LogoutConfirmationDialog extends StatelessWidget {
     return AlertDialog(
       title: const Text(
         'Log Out',
-        style: TextStyle(fontWeight: FontWeight.bold),
+        style: TextStyle(color: Colors.green, fontWeight: FontWeight.bold),
       ),
       content: const Text(
         'Are you sure you want to log out?',
