@@ -19,7 +19,7 @@ class StaffService {
          final response2 = await supabase
         .from('auth.users') 
         .select('id')
-        .eq('email', response?['from'])
+        .eq('email', response['from'])
         .limit(1)
         .maybeSingle();
 

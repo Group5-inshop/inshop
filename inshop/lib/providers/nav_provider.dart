@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:inshop/screens/login.dart';
 import 'package:inshop/screens/login_register.dart';
-import 'package:inshop/screens/register.dart';
 
 class NavProvider extends ChangeNotifier {
-  Widget currentWidget = LoginRegister();
+  Widget currentWidget = const LoginRegister();
   
   int index2 = 0;
 

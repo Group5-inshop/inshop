@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:inshop/providers/nav_provider.dart';
-import 'package:inshop/screens/skeleton.dart';
 import 'package:inshop/screens/skeleton_log.dart';
 import 'package:provider/provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -67,7 +66,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 // textButtonTheme: TextButtonThemeData(
                 //     style:
                 //         TextButton.styleFrom(foregroundColor: Colors.green))),
-            home: Scaffold(
+            home: const Scaffold(
                 
                 // backgroundColor: ThemeData.dark().colorScheme.primary),
                 body: Skeleton(),

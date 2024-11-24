@@ -17,7 +17,8 @@ class Accounts extends StatefulWidget {
 class _AccountsState extends State<Accounts> {
 
   Authservices authservice = Authservices();
-
+  var userId = supabase.auth.currentUser!.id;
+  
   String phone = "";
   String phones() {
 
@@ -31,6 +32,10 @@ class _AccountsState extends State<Accounts> {
 
   @override
   Widget build(BuildContext context) {
+    print(supabase.from('auth.users')
+              .select('display_name')
+              .eq('id', userId)
+    );
     return Scaffold(
         appBar: AppBar(
           backgroundColor: const Color.fromARGB(255, 95, 163, 98),
@@ -46,14 +51,15 @@ class _AccountsState extends State<Accounts> {
           const SizedBox(height: 10),
           Myprofilecontainer(
               textName: 'Name',
-              textField: supabase.auth.currentUser!.userMetadata?['username']),
+              textField: supabase.auth.currentUser!.userMetadata!['display_name'].toString(),
+              ),
           const SizedBox(height: 10),
           Myprofilecontainer(
               textName: 'Email',
               textField: supabase.auth.currentUser!.email.toString()),
           const SizedBox(height: 10),
           Myprofilecontainer(textName: 'Phone', textField: phones()),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           const Center(
             child: Text('Subscription'),
           ),
@@ -72,20 +78,20 @@ class _AccountsState extends State<Accounts> {
             child: ListView(
             scrollDirection: Axis.horizontal,
             shrinkWrap: true,
-            children: [
-              const SizedBox(
+            children: const [
+              SizedBox(
                 width: 20,),
               SubscriptionContainer( text: '''WEEKLY
               MWK12,000.00''',),
-              const SizedBox(
+              SizedBox(
                 width: 7,),
               SubscriptionContainer( text: '''MONTHLY
               MWK45,0000.00''',),
-              const SizedBox(
+              SizedBox(
                 width: 7,),
               SubscriptionContainer( text: '''YEARLY
               MWK520,000.00''',),
-              const SizedBox(
+              SizedBox(
                 width: 20,),
           ]),
           ),

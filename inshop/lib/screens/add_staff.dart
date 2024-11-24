@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:inshop/services/formservices.dart';
 import 'package:inshop/services/staffservice.dart';
 import 'package:inshop/widgets/mybutton.dart';
 import 'package:inshop/widgets/mytextfield.dart';
@@ -57,6 +58,7 @@ class _AddStaffState extends State<AddStaff> {
                   height: 70,
                 ),
                 MyTextField(
+                  validator: emailValidator(),
                   controller: _emailController,
                   obscure: false,
                   labelText: 'Email',

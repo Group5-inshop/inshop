@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:inshop/main.dart';
 import 'package:inshop/services/authservices.dart';
+import 'package:inshop/services/formservices.dart';
 import 'package:inshop/widgets/mytextfield.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 class Register extends StatefulWidget {
   final void Function()? onTap;
@@ -14,17 +13,14 @@ class Register extends StatefulWidget {
 
 class _RegisterState extends State<Register> {
   final TextEditingController _emailController = TextEditingController();
-
   final TextEditingController _firstnameController = TextEditingController();
-
   final TextEditingController _lastnameController = TextEditingController();
-
   final TextEditingController _phonenumberController = TextEditingController();
-
   final TextEditingController _passwordController = TextEditingController();
-
   final Authservices authservice = Authservices();
+
   
+
 
   @override
   Widget build(BuildContext context) {
@@ -48,6 +44,7 @@ class _RegisterState extends State<Register> {
                 height: 30,
               ),
               MyTextField(
+                validator: nameValidator(),
                 controller: _firstnameController,
                 obscure: false,
                 labelText: 'Firstname',
@@ -57,6 +54,7 @@ class _RegisterState extends State<Register> {
                 height: 10,
               ),
               MyTextField(
+                validator: nameValidator(),
                 controller: _lastnameController,
                 obscure: false,
                 labelText: 'Surname',
@@ -70,6 +68,7 @@ class _RegisterState extends State<Register> {
                 obscure: false,
                 labelText: 'Email',
                 hintText: '',
+                validator: emailValidator(),
               ),
               const SizedBox(
                 height: 10,
@@ -79,11 +78,13 @@ class _RegisterState extends State<Register> {
                 obscure: false,
                 labelText: 'Phone number',
                 hintText: '',
+                validator: phoneValidator(),
               ),
               const SizedBox(
                 height: 10,
               ),
               MyTextField(
+                validator: passwordValidator(),
                 controller: _passwordController,
                 obscure: true,
                 labelText: 'Password',
@@ -108,6 +109,7 @@ class _RegisterState extends State<Register> {
                     // final userID = supabase.auth.currentUser!.id;
                     authservice.register(_emailController, _passwordController, _firstnameController, _lastnameController, _phonenumberController, context);
                     widget.onTap!();
+                    
                   },
                   child: const Text('Register',
                       style: TextStyle(fontSize: 18, color: Colors.white)),

@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:inshop/main.dart';
-import 'package:inshop/providers/nav_provider.dart';
-import 'package:inshop/screens/Home.dart';
 import 'package:inshop/services/authservices.dart';
+import 'package:inshop/services/formservices.dart';
 import 'package:inshop/widgets/mytextfield.dart';
-import 'package:provider/provider.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 class Login extends StatefulWidget {
   final void Function()? onTap;
@@ -53,6 +49,7 @@ class _LoginState extends State<Login> {
                 height: 70,
               ),
               MyTextField(
+                validator: emailValidator(),
                 controller: _emailController,
                 obscure: false,
                 labelText: 'Email',
@@ -62,6 +59,7 @@ class _LoginState extends State<Login> {
                 height: 10,
               ),
               MyTextField(
+                validator: passwordValidator(),
                 controller: _passwordController,
                 obscure: true,
                 labelText: 'Password',
@@ -84,6 +82,7 @@ class _LoginState extends State<Login> {
                       )),
                   onPressed: () async {
                     authservice.login(_emailController, _passwordController, context);
+                    
                   },
                   child: const Text('Login',
                       style: TextStyle(fontSize: 18, color: Colors.white)),

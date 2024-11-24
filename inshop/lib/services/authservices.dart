@@ -7,17 +7,17 @@ import 'package:provider/provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class Authservices {
-  Future<void> login(TextEditingController _emailController, 
-  TextEditingController _passwordController,
+  Future<void> login(TextEditingController emailController, 
+  TextEditingController passwordController,
   BuildContext context) async {
     try {
-                      final email = _emailController.text.trim();
-                      final password = _passwordController.text.trim();
+                      final email = emailController.text.trim();
+                      final password = passwordController.text.trim();
 
                       await supabase.auth
                           .signInWithPassword(email: email, password: password);
-                      _emailController.clear();
-                      _passwordController.clear();
+                      emailController.clear();
+                      passwordController.clear();
 
                       context.read<NavProvider>().changePage(widget: const Home()); // there is supposed to be a home widget here
                     } on AuthException catch (error) {
@@ -42,81 +42,59 @@ class Authservices {
   late String error2;
   late String messaging = '';
 
-  Future<void> signUp(TextEditingController _emailController, 
-  TextEditingController _passwordController,
-  TextEditingController _firstnameController,
-  TextEditingController _lastnameController,
-  TextEditingController _phonenumberController) async {
-    try {
-      
-      await supabase.auth.signUp(
-          password: _passwordController.text.trim(),
-          email: _emailController.text.trim(),
-          // phone: _phonenumberController.text.trim(),
-          data: {
-            'phone': _phonenumberController.text,
-            'display name':
-                '${_firstnameController.text.trim()} ${_lastnameController.text.trim()}',
-          }
-          ); 
-          messaging = normal;
-          await supabase
-                .from('profiles')
-                .update({
-                  'business_id' : '',
-                  'business_name' : '',
-                  'first_name' : _firstnameController.text.trim(),
-                  'last_name' : _lastnameController.text.trim(),
-                  'phone' : _phonenumberController.text.trim(),
-                  'avatar_url' : '',
-                  'subscription_id' :'' ,
-                  'role' : 'customer',
-                  'username' : (_firstnameController.text.trim()+_lastnameController.text.trim()).toLowerCase(),
-                });
-                messaging = normal;
-    } on AuthException catch (error) {
-      error1 = error.message;
-      messaging = error1;
-      
-      print(
-          '''===================================================================
-    ${error.message}
-    =======================================================================''');
-      
-    } catch (error) {
-      error2 = error.toString();
-      messaging = error2;
-      
-      print(supabase.auth.currentUser!.id);
-      print('''=============================================
-    
-    ${error.toString()}
-    
-    ========================================================''');
-      
-    }
-  }
+ Future<void> register(
+  TextEditingController emailController,
+  TextEditingController passwordController,
+  TextEditingController firstnameController,
+  TextEditingController lastnameController,
+  TextEditingController phoneController,
+  BuildContext context
+) async {
+  try {
+    // Step 1: Sign up the user
+    final response = await supabase.auth.signUp(
+      email: emailController.text.trim(),
+      password: passwordController.text.trim(),
+      data: {
+        'first_name': firstnameController.text.trim(),
+        'last_name': lastnameController.text.trim(),
+        'phone': phoneController.text.trim(),
+        'display_name': '${firstnameController.text.trim()} ${lastnameController.text.trim()}',
+      },
+    );
 
-  Future<void> register(
-  TextEditingController _emailController, 
-  TextEditingController _passwordController,
-  TextEditingController _firstnameController,
-  TextEditingController _lastnameController,
-  TextEditingController _phonenumberController,
-  BuildContext context) async {
-    signUp(_emailController, 
-  _passwordController,
-  _firstnameController,
-  _lastnameController,
-  _phonenumberController);
-      
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(messaging),
-          duration: const Duration(seconds: 10),
+    final user = response.user;
+
+    if (user == null) {
+      throw Exception('Failed to create user.');
+    }
+
+    // Step 2: Insert profile details (if not using trigger)
+    await supabase.from('profiles').insert({
+      'id': user.id, // Link to auth.users.id
+      'first_name': firstnameController.text.trim(),
+      'last_name': lastnameController.text.trim(),
+      'phone': phoneController.text.trim(),
+      'role': 'customer', // Default role
+    });
+
+    
+ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Logged in successfully'),
+          duration: Duration(seconds: 2),
         ),
       );
+    
+    
+    print('User and profile created successfully.');
+  } catch (error) {
+    print('Error: $error');
   }
+}
+
+
+  
 
   Future<void> logout(BuildContext context) async { 
       supabase.auth.signOut();

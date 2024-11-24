@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:inshop/screens/Home.dart';
 import 'package:inshop/screens/accounts.dart';
 import 'package:inshop/screens/product_list_screen.dart';
 import 'package:inshop/screens/staff_management.dart';
