@@ -25,66 +25,86 @@ class _Skeleton2State extends State<Skeleton2> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: pages[currentIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: currentIndex,
-        onTap: (index) => setState(() => currentIndex = index),
-        selectedItemColor: Colors.green, // Highlight color for selected items
-        unselectedItemColor: Colors.black, // Color for unselected items
-        type: BottomNavigationBarType.fixed, // Keep labels always visible
-        selectedLabelStyle: const TextStyle(
-          fontSize: 16.0,
-          fontWeight: FontWeight.bold,
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Container(
+          height: 80, // Height of the circular navigation bar
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(50), // Fully circular
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.1),
+                spreadRadius: 5,
+                blurRadius: 10,
+                offset: const Offset(0, 5), // Shadow below the navigation bar
+              ),
+            ],
+          ),
+          child: BottomNavigationBar(
+            currentIndex: currentIndex,
+            onTap: (index) => setState(() => currentIndex = index),
+            backgroundColor: Colors.transparent, // No direct background
+            elevation: 0, // Remove default shadow
+            type: BottomNavigationBarType.fixed, // Always show labels
+            selectedItemColor: Colors.green, // Highlight selected item
+            unselectedItemColor: Colors.black, // Default black for unselected
+            selectedLabelStyle: const TextStyle(
+              fontSize: 16.0,
+              fontWeight: FontWeight.bold,
+            ),
+            unselectedLabelStyle: const TextStyle(
+              fontSize: 14.0,
+              fontWeight: FontWeight.normal,
+            ),
+            items: const [
+              BottomNavigationBarItem(
+                label: 'Home',
+                icon: Icon(
+                  Icons.store_outlined,
+                  size: 30.0,
+                ),
+                activeIcon: Icon(
+                  Icons.store,
+                  size: 36.0,
+                ),
+              ),
+              BottomNavigationBarItem(
+                label: 'SeLL',
+                icon: Icon(
+                  Icons.add_circle_outline_rounded,
+                  size: 30.0,
+                ),
+                activeIcon: Icon(
+                  Icons.add_circle,
+                  size: 36.0,
+                ),
+              ),
+              BottomNavigationBarItem(
+                label: 'Orders',
+                icon: Icon(
+                  Icons.work_history_outlined,
+                  size: 30.0,
+                ),
+                activeIcon: Icon(
+                  Icons.work_history,
+                  size: 36.0,
+                ),
+              ),
+              BottomNavigationBarItem(
+                label: 'Subscription',
+                icon: Icon(
+                  Icons.account_circle_outlined,
+                  size: 30.0,
+                ),
+                activeIcon: Icon(
+                  Icons.account_circle,
+                  size: 36.0,
+                ),
+              ),
+            ],
+          ),
         ),
-        unselectedLabelStyle: const TextStyle(
-          fontSize: 14.0,
-          fontWeight: FontWeight.normal,
-        ),
-        items: const [
-          BottomNavigationBarItem(
-            label: 'Home',
-            icon: Icon(
-              Icons.store_outlined,
-              size: 30.0,
-            ),
-            activeIcon: Icon(
-              Icons.store,
-              size: 36.0,
-            ),
-          ),
-          BottomNavigationBarItem(
-            label: 'Sell',
-            icon: Icon(
-              Icons.add_circle_outline_rounded,
-              size: 30.0,
-            ),
-            activeIcon: Icon(
-              Icons.add_circle,
-              size: 36.0,
-            ),
-          ),
-          BottomNavigationBarItem(
-            label: 'Orders',
-            icon: Icon(
-              Icons.work_history_outlined,
-              size: 30.0,
-            ),
-            activeIcon: Icon(
-              Icons.work_history,
-              size: 36.0,
-            ),
-          ),
-          BottomNavigationBarItem(
-            label: 'Subscription',
-            icon: Icon(
-              Icons.account_circle_outlined,
-              size: 30.0,
-            ),
-            activeIcon: Icon(
-              Icons.account_circle,
-              size: 36.0,
-            ),
-          ),
-        ],
       ),
     );
   }
