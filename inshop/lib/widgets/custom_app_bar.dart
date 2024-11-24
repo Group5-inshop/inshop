@@ -73,7 +73,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Logged in as Morten Msiska',
+                      'Logged in',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         color: Colors.black87,

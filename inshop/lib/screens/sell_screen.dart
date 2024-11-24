@@ -167,7 +167,7 @@ class _SellScreenState extends State<SellScreen> {
                   ),
                   child: const Text(
                     'Add Product',
-                    style: TextStyle(fontSize: 18),
+                    style: TextStyle(color: Colors.green, fontSize: 24,fontWeight: FontWeight.bold),
                   ),
                 ),
               ],

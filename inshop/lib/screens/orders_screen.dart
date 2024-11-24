@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:inshop/screens/alert_screen.dart';
-import 'package:inshop/screens/cart_screen.dart';
-import 'package:inshop/screens/profile_screen.dart';
 import 'package:inshop/widgets/custom_app_bar.dart';
-import 'package:inshop/widgets/custom_search_delegate.dart';
 import 'package:inshop/widgets/logout_confirmation_dialog.dart';
 
 class OrdersScreen extends StatefulWidget {
@@ -16,7 +12,6 @@ class OrdersScreen extends StatefulWidget {
 class _OrdersScreenState extends State<OrdersScreen> {
   final int _selectedIndex = 1; // Set initial index to 1 for Orders
   String userId = 'your_user_id';
-
 
   void _showLogoutDialog() {
     showDialog(
@@ -35,14 +30,14 @@ class _OrdersScreenState extends State<OrdersScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-appBar: const CustomAppBar(title: 'Orders'),
+      appBar: const CustomAppBar(title: 'Orders'),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
             const Text(
               'Incoming Orders',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              style: TextStyle(color: Colors.black, fontSize: 24, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 10),
             Expanded(
@@ -62,7 +57,7 @@ appBar: const CustomAppBar(title: 'Orders'),
             const SizedBox(height: 20),
             const Text(
               'Sent Orders',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              style: TextStyle(color:Colors.black,fontSize: 24, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 10),
             Expanded(

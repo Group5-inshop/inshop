@@ -157,7 +157,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
                   backgroundColor:
-                      Colors.blue, // Button color changed to backgroundColor
+                      Colors.green, // Button color changed to backgroundColor
                   textStyle: const TextStyle(fontSize: 18),
                 ),
                 child: const Text(
@@ -186,11 +186,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
       elevation: 2,
       margin: const EdgeInsets.only(bottom: 10),
       child: ListTile(
-        leading: Icon(icon, size: 30, color: Colors.blue),
+        leading: Icon(icon, size: 30, color: Colors.green),
         title: Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
         subtitle: Text(value),
         trailing: IconButton(
-          icon: const Icon(Icons.edit, color: Colors.blue), // Edit icon
+          icon: const Icon(Icons.edit, color: Colors.green), // Edit icon
           onPressed: () {
             // Handle edit action
           },

@@ -70,20 +70,20 @@ class _AccountsState extends State<Accounts> {
             child: ListView(
             scrollDirection: Axis.horizontal,
             shrinkWrap: true,
-            children: [
-              const SizedBox(
+            children: const [
+              SizedBox(
                 width: 20,),
               SubscriptionContainer( text: '''WEEKLY
               MWK12,000.00''',),
-              const SizedBox(
+              SizedBox(
                 width: 7,),
               SubscriptionContainer( text: '''MONTHLY
               MWK45,0000.00''',),
-              const SizedBox(
+              SizedBox(
                 width: 7,),
               SubscriptionContainer( text: '''YEARLY
               MWK520,000.00''',),
-              const SizedBox(
+              SizedBox(
                 width: 20,),
           ]),
           ),
