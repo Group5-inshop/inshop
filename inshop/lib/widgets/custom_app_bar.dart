@@ -16,7 +16,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       automaticallyImplyLeading: false,
-      backgroundColor: const Color.fromARGB(131, 76, 175, 79),  // Set the background color to green
+      backgroundColor: const Color.fromARGB(160, 76, 175, 79),  // Set the background color to green
       title: Padding(
         padding: const EdgeInsets.only(top: 10.0), // Add padding to move the title down
         child: Text(
