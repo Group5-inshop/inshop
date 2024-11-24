@@ -5,6 +5,7 @@ class MyTextField extends StatelessWidget {
   final bool obscure;
   final String labelText;
   final String hintText;
+  final FormFieldValidator<String> validator;
 
   const MyTextField({
     super.key,
@@ -12,6 +13,7 @@ class MyTextField extends StatelessWidget {
     required this.obscure,
     required this.labelText,
     required this.hintText,
+    required this.validator,
   });
 
   @override
@@ -21,6 +23,7 @@ class MyTextField extends StatelessWidget {
       width: 150,
       padding: const EdgeInsets.only(left: 23, right: 25),
       child: TextFormField(
+        validator: validator,
         obscureText: obscure,
         controller: controller,
         decoration: InputDecoration(

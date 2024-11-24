@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:inshop/providers/nav_provider.dart';
-import 'package:inshop/screens/skeleton.dart';
+import 'package:inshop/screens/skeleton_log.dart';
 import 'package:provider/provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 void main() async {
@@ -69,7 +69,7 @@ class _MyHomePageState extends State<MyHomePage> {
             home: const Scaffold(
                 
                 // backgroundColor: ThemeData.dark().colorScheme.primary),
-                body: Skeleton2(),
+                body: Skeleton(),
                 ),
           )),
     );

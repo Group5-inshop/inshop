@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:inshop/main.dart';
+import 'package:inshop/services/authservices.dart';
+import 'package:inshop/services/formservices.dart';
 import 'package:inshop/widgets/mytextfield.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 class Register extends StatefulWidget {
   final void Function()? onTap;
@@ -13,54 +13,14 @@ class Register extends StatefulWidget {
 
 class _RegisterState extends State<Register> {
   final TextEditingController _emailController = TextEditingController();
-
   final TextEditingController _firstnameController = TextEditingController();
-
   final TextEditingController _lastnameController = TextEditingController();
-
   final TextEditingController _phonenumberController = TextEditingController();
-
   final TextEditingController _passwordController = TextEditingController();
-  // String normal = "Done";
-  // late String error1;
-  // late String error2;
-  // late String messaging;
+  final Authservices authservice = Authservices();
 
-  Future<void> signUp() async {
-    try {
-      
-      await supabase.auth.signUp(
-          password: _passwordController.text.trim(),
-          email: _emailController.text.trim(),
-          // phone: _phonenumberController.text.trim(),
-          data: {
-            'phone': _phonenumberController.text,
-            'display name':
-                '${_firstnameController.text.trim()} ${_lastnameController.text.trim()}',
-          }); 
-          // messaging = normal;
-    } on AuthException catch (error) {
-      // error1 = error.message;
-      // messaging = error1;
-      
-      print(
-          '''===================================================================
-    ${error.message}
-    =======================================================================''');
-      
-    } catch (error) {
-      // error2 = error.toString();
-      // messaging = error2;
-      
-      print(supabase.auth.currentUser!.id);
-      print('''=============================================
-    
-    ${error.toString()}
-    
-    ========================================================''');
-      
-    }
-  }
+  
+
 
   @override
   Widget build(BuildContext context) {
@@ -84,6 +44,7 @@ class _RegisterState extends State<Register> {
                 height: 30,
               ),
               MyTextField(
+                validator: nameValidator(),
                 controller: _firstnameController,
                 obscure: false,
                 labelText: 'Firstname',
@@ -93,6 +54,7 @@ class _RegisterState extends State<Register> {
                 height: 10,
               ),
               MyTextField(
+                validator: nameValidator(),
                 controller: _lastnameController,
                 obscure: false,
                 labelText: 'Surname',
@@ -106,6 +68,7 @@ class _RegisterState extends State<Register> {
                 obscure: false,
                 labelText: 'Email',
                 hintText: '',
+                validator: emailValidator(),
               ),
               const SizedBox(
                 height: 10,
@@ -115,11 +78,13 @@ class _RegisterState extends State<Register> {
                 obscure: false,
                 labelText: 'Phone number',
                 hintText: '',
+                validator: phoneValidator(),
               ),
               const SizedBox(
                 height: 10,
               ),
               MyTextField(
+                validator: passwordValidator(),
                 controller: _passwordController,
                 obscure: true,
                 labelText: 'Password',
@@ -142,14 +107,16 @@ class _RegisterState extends State<Register> {
                       )),
                   onPressed: () async {
                     // final userID = supabase.auth.currentUser!.id;
-                    signUp();
+                    authservice.register(_emailController, _passwordController, _firstnameController, _lastnameController, _phonenumberController, context);
                     widget.onTap!();
+
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
                         content: Text('Registration successful'),
                         duration: Duration(seconds: 10),
                       ),
                     );
+
                   },
                   child: const Text('Register',
                       style: TextStyle(fontSize: 18, color: Colors.white)),

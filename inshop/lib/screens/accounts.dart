@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:inshop/main.dart';
 import 'package:inshop/providers/nav_provider.dart';
 import 'package:inshop/screens/login_register.dart';
+import 'package:inshop/services/authservices.dart';
 import 'package:inshop/widgets/myprofilecontainer.dart';
 import 'package:inshop/widgets/mysubscriptioncontainer.dart';
 import 'package:provider/provider.dart';
@@ -14,19 +15,27 @@ class Accounts extends StatefulWidget {
 }
 
 class _AccountsState extends State<Accounts> {
-  // String phone = "";
-  // String phones() {
 
-  //   try {
-  //     phone = supabase.auth.currentUser!.userMetadata!['phone'];
-  //   } catch (e) {
-  //     phone = "No phone numbers";
-  //   }
-  //   return phone;
-  // }
+  Authservices authservice = Authservices();
+  var userId = supabase.auth.currentUser!.id;
+  
+  String phone = "";
+  String phones() {
+
+    try {
+      phone = supabase.auth.currentUser!.userMetadata!['phone'];
+    } catch (e) {
+      phone = "No phone numbers";
+    }
+    return phone;
+  }
 
   @override
   Widget build(BuildContext context) {
+    print(supabase.from('auth.users')
+              .select('display_name')
+              .eq('id', userId)
+    );
     return Scaffold(
         appBar: AppBar(
           backgroundColor: const Color.fromARGB(255, 95, 163, 98),
@@ -34,23 +43,24 @@ class _AccountsState extends State<Accounts> {
           actions: [ ElevatedButton( 
             child: const Text('Logout'), 
             onPressed: (){
-              // supabase.auth.signOut();
-              // context.read<NavProvider>()
-              //       .changePage(widget: const LoginRegister());
+              authservice.logout(context);
           }), const SizedBox(width: 10)] ,),
           
         body: ListView(children: [
           const Icon(Icons.account_circle, size: 102.0, color: Color.fromARGB(255, 89, 149, 104),),
           const SizedBox(height: 10),
-          // Myprofilecontainer(
-          //     textName: 'Name',
-          //     textField: supabase.auth.currentUser!.userMetadata?['username']),
-          // const SizedBox(height: 10),
-          // Myprofilecontainer(
-          //     textName: 'Email',
-          //     textField: supabase.auth.currentUser!.email.toString()),
-          // const SizedBox(height: 10),
-          // Myprofilecontainer(textName: 'Phone', textField: phones()),
+
+          Myprofilecontainer(
+              textName: 'Name',
+              textField: supabase.auth.currentUser!.userMetadata!['display_name'].toString(),
+              ),
+          const SizedBox(height: 10),
+          Myprofilecontainer(
+              textName: 'Email',
+              textField: supabase.auth.currentUser!.email.toString()),
+          const SizedBox(height: 10),
+          Myprofilecontainer(textName: 'Phone', textField: phones()),
+
           const SizedBox(height: 20),
           const Center(
             child: Text('Subscription'),

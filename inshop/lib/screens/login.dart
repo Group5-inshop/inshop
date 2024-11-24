@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:inshop/main.dart';
-import 'package:inshop/providers/nav_provider.dart';
-import 'package:inshop/screens/Home.dart';
+import 'package:inshop/services/authservices.dart';
+import 'package:inshop/services/formservices.dart';
 import 'package:inshop/widgets/mytextfield.dart';
-import 'package:provider/provider.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 class Login extends StatefulWidget {
   final void Function()? onTap;
@@ -20,6 +17,7 @@ class _LoginState extends State<Login> {
   // final TextEditingController _phonenumberController = TextEditingController();
 
   final TextEditingController _passwordController = TextEditingController();
+  final Authservices authservice = Authservices(); 
  
   @override
   void dispose() {
@@ -51,6 +49,7 @@ class _LoginState extends State<Login> {
                 height: 70,
               ),
               MyTextField(
+                validator: emailValidator(),
                 controller: _emailController,
                 obscure: false,
                 labelText: 'Email',
@@ -60,6 +59,7 @@ class _LoginState extends State<Login> {
                 height: 10,
               ),
               MyTextField(
+                validator: passwordValidator(),
                 controller: _passwordController,
                 obscure: true,
                 labelText: 'Password',
@@ -81,31 +81,8 @@ class _LoginState extends State<Login> {
                         borderRadius: BorderRadius.circular(50.0),
                       )),
                   onPressed: () async {
-                    try {
-                      final email = _emailController.text.trim();
-                      final password = _passwordController.text.trim();
-
-                      await supabase.auth
-                          .signInWithPassword(email: email, password: password);
-                      _emailController.clear();
-                      _passwordController.clear();
-
-                      context.read<NavProvider>().changePage(widget: const Home()); // there is supposed to be a home widget here
-                    } on AuthException catch (error) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text("error is:  ${error.message}"),
-                          duration: const Duration(seconds: 2),
-                        ),
-                      );
-                    } catch (error) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text(error.toString()),
-                          duration: const Duration(seconds: 2),
-                        ),
-                      );
-                    }
+                    authservice.login(_emailController, _passwordController, context);
+                    
                   },
                   child: const Text('Login',
                       style: TextStyle(fontSize: 18, color: Colors.white)),
