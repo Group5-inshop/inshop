@@ -109,7 +109,14 @@ class _RegisterState extends State<Register> {
                     // final userID = supabase.auth.currentUser!.id;
                     authservice.register(_emailController, _passwordController, _firstnameController, _lastnameController, _phonenumberController, context);
                     widget.onTap!();
-                    
+
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Registration successful'),
+                        duration: Duration(seconds: 10),
+                      ),
+                    );
+
                   },
                   child: const Text('Register',
                       style: TextStyle(fontSize: 18, color: Colors.white)),

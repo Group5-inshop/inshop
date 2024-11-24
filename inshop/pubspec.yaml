@@ -11,6 +11,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  image_picker: ^0.8.7+3
+
   cupertino_icons: ^1.0.8
   flutter_riverpod: ^2.5.1
   riverpod_annotation: ^2.3.5

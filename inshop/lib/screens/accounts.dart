@@ -49,6 +49,7 @@ class _AccountsState extends State<Accounts> {
         body: ListView(children: [
           const Icon(Icons.account_circle, size: 102.0, color: Color.fromARGB(255, 89, 149, 104),),
           const SizedBox(height: 10),
+
           Myprofilecontainer(
               textName: 'Name',
               textField: supabase.auth.currentUser!.userMetadata!['display_name'].toString(),
@@ -59,6 +60,7 @@ class _AccountsState extends State<Accounts> {
               textField: supabase.auth.currentUser!.email.toString()),
           const SizedBox(height: 10),
           Myprofilecontainer(textName: 'Phone', textField: phones()),
+
           const SizedBox(height: 20),
           const Center(
             child: Text('Subscription'),
