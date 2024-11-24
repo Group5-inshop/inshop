@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:inshop/screens/accounts.dart';
 import 'package:inshop/screens/home_screen.dart';
 import 'package:inshop/screens/orders_screen.dart';
-import 'package:inshop/screens/product_list_screen.dart';
 import 'package:inshop/screens/sell_screen.dart';
 
 class Skeleton2 extends StatefulWidget {
@@ -26,50 +25,66 @@ class _Skeleton2State extends State<Skeleton2> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: pages[currentIndex],
-      bottomNavigationBar: NavigationBarTheme(
-        data: NavigationBarThemeData(
-          backgroundColor: const Color.fromARGB(255, 227, 245, 228),
-          indicatorColor: const Color.fromARGB(255, 89, 149, 104),
-          labelTextStyle: WidgetStateProperty.all<TextStyle>(
-            const TextStyle(color: Color.fromARGB(255, 63, 107, 74)),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: currentIndex,
+        onTap: (index) => setState(() => currentIndex = index),
+        selectedItemColor: Colors.green, // Highlight color for selected items
+        unselectedItemColor: Colors.black, // Color for unselected items
+        type: BottomNavigationBarType.fixed, // Keep labels always visible
+        selectedLabelStyle: const TextStyle(
+          fontSize: 16.0,
+          fontWeight: FontWeight.bold,
+        ),
+        unselectedLabelStyle: const TextStyle(
+          fontSize: 14.0,
+          fontWeight: FontWeight.normal,
+        ),
+        items: const [
+          BottomNavigationBarItem(
+            label: 'Home',
+            icon: Icon(
+              Icons.store_outlined,
+              size: 30.0,
+            ),
+            activeIcon: Icon(
+              Icons.store,
+              size: 36.0,
+            ),
           ),
-        ),
-        child: NavigationBar(
-          labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
-          selectedIndex: currentIndex,
-          onDestinationSelected: (index) =>
-              setState(() => currentIndex = index),
-          destinations: const [
-            NavigationDestination(
-              icon: Icon(Icons.business_outlined,
-                  color: Color.fromARGB(255, 89, 149, 104)),
-              label: 'Business',
-              selectedIcon: Icon(Icons.business,
-                  size: 35, color: Color.fromARGB(255, 194, 243, 200)),
+          BottomNavigationBarItem(
+            label: 'Sell',
+            icon: Icon(
+              Icons.add_circle_outline_rounded,
+              size: 30.0,
             ),
-            NavigationDestination(
-              icon: Icon(Icons.sell_outlined,
-                  color: Color.fromARGB(255, 89, 149, 104)),
-              label: 'Sell',
-              selectedIcon: Icon(Icons.add_circle_outline_rounded,
-                  size: 35, color: Color.fromARGB(255, 194, 243, 200)),
+            activeIcon: Icon(
+              Icons.add_circle,
+              size: 36.0,
             ),
-            NavigationDestination(
-              icon: Icon(Icons.home_outlined,
-                  color: Color.fromARGB(255, 89, 149, 104)),
-              label: 'Orders',
-              selectedIcon: Icon(Icons.work_history,
-                  size: 35, color: Color.fromARGB(255, 194, 243, 200)),
+          ),
+          BottomNavigationBarItem(
+            label: 'Orders',
+            icon: Icon(
+              Icons.work_history_outlined,
+              size: 30.0,
             ),
-            NavigationDestination(
-              icon: Icon(Icons.account_circle_outlined,
-                  color: Color.fromARGB(255, 89, 149, 104)),
-              label: 'Subsription',
-              selectedIcon: Icon(Icons.account_circle,
-                  size: 35, color: Color.fromARGB(255, 194, 243, 200)),
+            activeIcon: Icon(
+              Icons.work_history,
+              size: 36.0,
             ),
-          ],
-        ),
+          ),
+          BottomNavigationBarItem(
+            label: 'Subscription',
+            icon: Icon(
+              Icons.account_circle_outlined,
+              size: 30.0,
+            ),
+            activeIcon: Icon(
+              Icons.account_circle,
+              size: 36.0,
+            ),
+          ),
+        ],
       ),
     );
   }
