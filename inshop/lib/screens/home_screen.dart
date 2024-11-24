@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:inshop/screens/sell_screen.dart';
 import 'package:inshop/widgets/custom_app_bar.dart';
 import 'package:inshop/widgets/product.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';

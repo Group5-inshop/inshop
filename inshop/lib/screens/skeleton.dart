@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:inshop/screens/Home.dart';
 import 'package:inshop/screens/accounts.dart';
+import 'package:inshop/screens/home_screen.dart';
 import 'package:inshop/screens/product_list_screen.dart';
-import 'package:inshop/screens/staff_management.dart';
 import 'package:inshop/screens/sell_screen.dart';
 
 class Skeleton2 extends StatefulWidget {
@@ -16,7 +15,7 @@ class _Skeleton2State extends State<Skeleton2> {
   int currentIndex = 0;
 
   List<Widget> pages = [
-    const StaffManagement(),
+    const HomeScreen(),
     ProductListScreen(),
     const Accounts(),
     const SellScreen(),
@@ -30,7 +29,7 @@ class _Skeleton2State extends State<Skeleton2> {
         data: NavigationBarThemeData(
           backgroundColor: const Color.fromARGB(255, 227, 245, 228),
           indicatorColor: const Color.fromARGB(255, 89, 149, 104),
-          labelTextStyle: WidgetStateProperty.all<TextStyle>(
+          labelTextStyle: MaterialStateProperty.all<TextStyle>(
             const TextStyle(color: Color.fromARGB(255, 63, 107, 74)),
           ),
         ),
