@@ -11,20 +11,28 @@ class SellScreen extends StatefulWidget {
 
 class _SellScreenState extends State<SellScreen> {
   final _formKey = GlobalKey<FormState>();
+  final ImagePicker _picker = ImagePicker(); // Define the ImagePicker
   String? _productName;
   int? _quantity;
   double? _price;
-  File? _productImage;
-
-  final ImagePicker _picker = ImagePicker();
+  File? _productImage; // Store the selected image
 
   Future<void> _pickImage() async {
-    final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
+    try {
+      final pickedFile = await _picker.pickImage(
+        source: ImageSource.gallery,
+      );
 
-    if (pickedFile != null) {
-      setState(() {
-        _productImage = File(pickedFile.path);
-      });
+      if (pickedFile != null) {
+        setState(() {
+          _productImage = File(pickedFile.path); // Convert XFile to File
+        });
+      } else {
+        // Handle when no image is selected
+        print('No image selected.');
+      }
+    } catch (e) {
+      print('Error picking image: $e');
     }
   }
 
@@ -48,7 +56,8 @@ class _SellScreenState extends State<SellScreen> {
         centerTitle: true,
       ),
       body: GestureDetector(
-        onTap: () => FocusScope.of(context).unfocus(), // Dismiss keyboard on tap outside
+        onTap: () =>
+            FocusScope.of(context).unfocus(), // Dismiss keyboard on tap outside
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(16.0),
           child: Form(
@@ -95,8 +104,9 @@ class _SellScreenState extends State<SellScreen> {
                     filled: true,
                     fillColor: Colors.grey.shade100,
                   ),
-                  validator: (value) =>
-                      value?.isEmpty ?? true ? 'Please enter a product name' : null,
+                  validator: (value) => value?.isEmpty ?? true
+                      ? 'Please enter a product name'
+                      : null,
                   onSaved: (value) => _productName = value,
                 ),
                 const SizedBox(height: 16),
@@ -140,7 +150,8 @@ class _SellScreenState extends State<SellScreen> {
                     if (value == null || value.isEmpty) {
                       return 'Please enter a price';
                     }
-                    if (double.tryParse(value) == null || double.parse(value) <= 0) {
+                    if (double.tryParse(value) == null ||
+                        double.parse(value) <= 0) {
                       return 'Enter a valid price';
                     }
                     return null;
