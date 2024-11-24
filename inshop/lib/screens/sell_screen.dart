@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 
+import 'package:inshop/widgets/custom_app_bar.dart';
+
 class SellScreen extends StatefulWidget {
   const SellScreen({super.key});
 
@@ -48,13 +50,7 @@ class _SellScreenState extends State<SellScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          'Sell',
-          style: TextStyle(fontSize: 28, fontWeight: FontWeight.w600),
-        ),
-        centerTitle: true,
-      ),
+      appBar: const CustomAppBar(title: 'Sell'),
       body: GestureDetector(
         onTap: () =>
             FocusScope.of(context).unfocus(), // Dismiss keyboard on tap outside
