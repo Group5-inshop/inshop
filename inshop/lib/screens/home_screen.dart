@@ -12,7 +12,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final supabase = Supabase.instance.client;
-  int _selectedIndex = 0; // Track the selected index
+  final int _selectedIndex = 0; // Track the selected index
   final List<Map<String, dynamic>> _cartItems = []; // List to store cart items
 
   // Fetch products by category from Supabase

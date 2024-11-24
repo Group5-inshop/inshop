@@ -1,7 +1,7 @@
 // product_create_screen.dart
 import 'package:flutter/material.dart';
 import 'package:inshop/models/product.dart';
-import 'package:inshop/services/product_service.dart'; // Assuming a ProductService
+// Assuming a ProductService
 
 class ProductCreateScreen extends StatefulWidget {
   const ProductCreateScreen({super.key});

@@ -1,147 +1,171 @@
 import 'package:flutter/material.dart';
-import 'package:inshop/screens/alert_screen.dart';
-import 'package:inshop/screens/home_screen.dart';
-import 'package:inshop/screens/cart_screen.dart';
-import 'package:inshop/screens/profile_screen.dart';
-import 'package:inshop/widgets/custom_search_delegate.dart';
-import 'package:inshop/widgets/logout_confirmation_dialog.dart';
+import 'package:image_picker/image_picker.dart';
+import 'dart:io';
 
 class SellScreen extends StatefulWidget {
   const SellScreen({super.key});
 
   @override
-  _SellScreenState createState() => _SellScreenState();
+  State<SellScreen> createState() => _SellScreenState();
 }
 
 class _SellScreenState extends State<SellScreen> {
-  final int _selectedIndex = 2; // Set initial index to 2 for Sell
-  String? userId = 'hardcoded_user_id'; // Assign the hardcoded userId
+  final _formKey = GlobalKey<FormState>();
+  String? _productName;
+  int? _quantity;
+  double? _price;
+  File? _productImage;
 
-  @override
-  void initState() {
-    super.initState();
-    // Since userId is hardcoded, no need to fetch it from Supabase
+  final ImagePicker _picker = ImagePicker();
+
+  Future<void> _pickImage() async {
+    final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
+
+    if (pickedFile != null) {
+      setState(() {
+        _productImage = File(pickedFile.path);
+      });
+    }
   }
 
-  // This function will be called when a bottom navigation item is tapped
-
-  void _showLogoutDialog() {
-    showDialog(
-      context: context,
-      builder: (context) => LogoutConfirmationDialog(
-        onConfirm: () {
-          // Add log out functionality here
-        },
-        onCancel: () {
-          Navigator.of(context).pop(); // Close the dialog
-        },
-      ),
-    );
+  void _submitProduct() {
+    if (_formKey.currentState?.validate() ?? false) {
+      _formKey.currentState?.save();
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Product added successfully!')),
+      );
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: false, // Removes the back arrow
         title: const Text(
           'Sell',
-          style: TextStyle(fontSize: 30, fontWeight: FontWeight.w700),
+          style: TextStyle(fontSize: 28, fontWeight: FontWeight.w600),
         ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.search, size: 36),
-            onPressed: () {
-              showSearch(context: context, delegate: CustomSearchDelegate());
-            },
-          ),
-          IconButton(
-            icon: const Icon(Icons.add_shopping_cart_sharp, size: 36),
-            onPressed: userId == null
-                ? null // Disable the button until the userId is fetched
-                : () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => const CartScreen(),
-                      ),
-                    );
+        centerTitle: true,
+      ),
+      body: GestureDetector(
+        onTap: () => FocusScope.of(context).unfocus(), // Dismiss keyboard on tap outside
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(16.0),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                // Product Image Upload Section
+                GestureDetector(
+                  onTap: _pickImage,
+                  child: Container(
+                    height: 180,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(16),
+                      border: Border.all(color: Colors.grey.shade400),
+                      color: Colors.grey.shade200,
+                    ),
+                    child: _productImage == null
+                        ? const Center(
+                            child: Icon(
+                              Icons.camera_alt_outlined,
+                              size: 50,
+                              color: Colors.grey,
+                            ),
+                          )
+                        : ClipRRect(
+                            borderRadius: BorderRadius.circular(16),
+                            child: Image.file(
+                              _productImage!,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                  ),
+                ),
+                const SizedBox(height: 20),
+
+                // Product Name Field
+                TextFormField(
+                  decoration: InputDecoration(
+                    labelText: 'Product Name',
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    filled: true,
+                    fillColor: Colors.grey.shade100,
+                  ),
+                  validator: (value) =>
+                      value?.isEmpty ?? true ? 'Please enter a product name' : null,
+                  onSaved: (value) => _productName = value,
+                ),
+                const SizedBox(height: 16),
+
+                // Quantity Field
+                TextFormField(
+                  decoration: InputDecoration(
+                    labelText: 'Quantity',
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    filled: true,
+                    fillColor: Colors.grey.shade100,
+                  ),
+                  keyboardType: TextInputType.number,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter a quantity';
+                    }
+                    if (int.tryParse(value) == null || int.parse(value) <= 0) {
+                      return 'Enter a valid quantity';
+                    }
+                    return null;
                   },
-          ),
-          IconButton(
-            icon: const Icon(Icons.notification_important_outlined, size: 36),
-            onPressed: () {
-              Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => const AlertsScreen()));
-            },
-          ),
-          Padding(
-            padding: const EdgeInsets.only(right: 20.0),
-            child: PopupMenuButton<int>(
-              icon: const Icon(Icons.manage_accounts_rounded, size: 38),
-              itemBuilder: (context) => [
-                const PopupMenuItem<int>(
-                  value: 0,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Logged in as Morten Msiska',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black87,
-                          fontSize: 16.0,
-                        ),
-                      ),
-                      Divider(),
-                    ],
-                  ),
+                  onSaved: (value) => _quantity = int.tryParse(value!),
                 ),
-                const PopupMenuItem<int>(
-                  value: 1,
-                  child: Row(
-                    children: [
-                      Icon(Icons.settings, color: Colors.black87),
-                      SizedBox(width: 8),
-                      Text(
-                        'Settings',
-                        style: TextStyle(fontSize: 16.0),
-                      ),
-                    ],
+                const SizedBox(height: 16),
+
+                // Price Field
+                TextFormField(
+                  decoration: InputDecoration(
+                    labelText: 'Price (MWK)',
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    filled: true,
+                    fillColor: Colors.grey.shade100,
                   ),
+                  keyboardType: TextInputType.number,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter a price';
+                    }
+                    if (double.tryParse(value) == null || double.parse(value) <= 0) {
+                      return 'Enter a valid price';
+                    }
+                    return null;
+                  },
+                  onSaved: (value) => _price = double.tryParse(value!),
                 ),
-                const PopupMenuItem<int>(
-                  value: 2,
-                  child: Row(
-                    children: [
-                      Icon(Icons.logout, color: Colors.black87),
-                      SizedBox(width: 8),
-                      Text(
-                        'Log Out',
-                        style: TextStyle(fontSize: 16.0),
-                      ),
-                    ],
+                const SizedBox(height: 30),
+
+                // Submit Button
+                ElevatedButton(
+                  onPressed: _submitProduct,
+                  style: ElevatedButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                  child: const Text(
+                    'Add Product',
+                    style: TextStyle(fontSize: 18),
                   ),
                 ),
               ],
-              onSelected: (item) {
-                switch (item) {
-                  case 1:
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const ProfileScreen()));
-                    break;
-                  case 2:
-                    _showLogoutDialog(); // Show the logout dialog
-                    break;
-                }
-              },
             ),
           ),
-        ],
-      ),
-      body: const Center(
-        child: Text(
-          'Add product to Sell',
-          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
         ),
       ),
     );

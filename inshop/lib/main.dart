@@ -67,7 +67,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 // textButtonTheme: TextButtonThemeData(
                 //     style:
                 //         TextButton.styleFrom(foregroundColor: Colors.green))),
-            home: Scaffold(
+            home: const Scaffold(
                 
                 // backgroundColor: ThemeData.dark().colorScheme.primary),
                 body: Skeleton2(),

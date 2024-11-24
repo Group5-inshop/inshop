@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class SubscriptionContainer extends StatelessWidget {
-  SubscriptionContainer({super.key, required this.text});
+  const SubscriptionContainer({super.key, required this.text});
   final String text;
 
 
@@ -20,14 +20,14 @@ class SubscriptionContainer extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(text, textAlign: TextAlign.center,),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                     ElevatedButton(
                       onPressed: () {
                         //handle subscription
                       },
-                      child: Text('Subscribe'),
+                      child: const Text('Subscribe'),
                     ),
                 ],
               ),

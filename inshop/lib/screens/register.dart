@@ -145,9 +145,9 @@ class _RegisterState extends State<Register> {
                     signUp();
                     widget.onTap!();
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
+                      const SnackBar(
                         content: Text('Registration successful'),
-                        duration: const Duration(seconds: 10),
+                        duration: Duration(seconds: 10),
                       ),
                     );
                   },

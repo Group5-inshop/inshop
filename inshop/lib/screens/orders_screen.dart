@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:inshop/screens/alert_screen.dart';
 import 'package:inshop/screens/cart_screen.dart';
-import 'package:inshop/screens/home_screen.dart';
 import 'package:inshop/screens/profile_screen.dart';
-import 'package:inshop/screens/sell_screen.dart';
 import 'package:inshop/widgets/custom_search_delegate.dart';
 import 'package:inshop/widgets/logout_confirmation_dialog.dart';
 
